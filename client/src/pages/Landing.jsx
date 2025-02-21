@@ -54,7 +54,7 @@ const Landing = () => {
               color: "#4B4453",
             }}
           >
-            Kipa Auction
+            Online Bidding
           </Typography.Title>
 
           <Flex
@@ -84,7 +84,7 @@ const Landing = () => {
             </Button>
           </Typography.Text>
           <Drawer
-            title="Kipa Auction"
+            title="Online Bidding"
             placement="right"
             closable={false}
             onClose={showDrawer}
