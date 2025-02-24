@@ -1,4 +1,4 @@
-import { Flex, Button, Drawer, Typography } from "antd";
+import { Flex, Button, Drawer, Typography, Switch, ConfigProvider } from "antd";
 import { useEffect, useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const Landing = () => {
   const { user } = useSelector((state) => state.auth);
 
   const [visible, setVisible] = useState(false);
+  const [theme, setTheme] = useState("light");
   const showDrawer = () => {
     setVisible(!visible);
   };
@@ -39,19 +40,25 @@ const Landing = () => {
     }
   }, [user, navigate]);
 
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
-    <>
+    <ConfigProvider theme={{ mode:theme}}>
+      <div className={theme === "dark" ? "dark bg-gray-900 text-white" : "bg-white text-black"}>
       {/* Navbar section */}
-      <nav className="border-b border sticky top-0 bg-white z-50 md:px-10 px-4">
+      <nav className= {` sticky top-0 z-50 md:px-10 px-4 py-3 ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
         <Flex
           align="center"
           justify="space-between"
-          style={{ padding: "0.6rem 0.5rem" }}
+          // style={{ padding: "0.6rem 0.5rem" }}
         >
           <Typography.Title
             level={3}
+            className="!mb-0"
             style={{
-              color: "#4B4453",
+              color: theme === "dark" ? "white" : "#4B4453",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -63,17 +70,17 @@ const Landing = () => {
           <Flex
             align="center"
             justify="space-between"
-            className="hidden md:flex"
+            className="hidden md:flex gap-6"
           >
             {navMenu.map((menu, index) => (
-              <Button key={index} type="text" size="large">
+              <Button key={index} type="text" size="large" style={{ color: theme === "dark" ? "white" : "black" }}>
                 {menu.title}
               </Button>
             ))}
           </Flex>
           <Flex
             align="center"
-            justify="space-between"
+            // justify="space-between"
             className="hidden md:flex gap-4"
           >
             <Button onClick={() => navigate("/login")}>Login</Button>
@@ -83,6 +90,7 @@ const Landing = () => {
             <Button onClick={() => navigate("/RegisterBusiness")}>
               Register Your Business
             </Button>
+            <Switch checked={theme === "dark"} onChange={toggleTheme} />
           </Flex>
           <Typography.Text className="text-gray-900 md:hidden">
             <Button type="default" onClick={showDrawer}>
@@ -153,7 +161,8 @@ const Landing = () => {
 
       {/* Footer */}
       <Footer />
-    </>
+      </div>
+      </ConfigProvider>
   );
 };
 
