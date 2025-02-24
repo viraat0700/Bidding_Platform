@@ -52,6 +52,9 @@ const Landing = () => {
             level={3}
             style={{
               color: "#4B4453",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             }}
           >
             Online Bidding
@@ -74,8 +77,11 @@ const Landing = () => {
             className="hidden md:flex gap-4"
           >
             <Button onClick={() => navigate("/login")}>Login</Button>
-            <Button type="primary" onClick={() => navigate("/signup")}>
-              Sign up
+            <Button onClick={() => navigate("/submitRequirement")}>
+              Submit Your Requirements
+            </Button>
+            <Button onClick={() => navigate("/RegisterBusiness")}>
+              Register Your Business
             </Button>
           </Flex>
           <Typography.Text className="text-gray-900 md:hidden">
@@ -132,16 +138,6 @@ const Landing = () => {
                 experience the excitement of winning big in the world of online
                 auctions!
               </p>
-
-              <button
-                className="px-3 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500 mr-4"
-                onClick={() => navigate("/signup")}
-              >
-                Signup
-              </button>
-              <Button size="large" onClick={() => navigate("/login")}>
-                Login
-              </Button>
             </div>
           </div>
 

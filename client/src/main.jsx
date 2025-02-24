@@ -4,6 +4,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./Error.jsx";
 import Landing from "./pages/Landing.jsx";
+import Login from "./pages/Login.jsx";
+import SubmitRequirements from "./pages/SubmitRequirements.jsx";
+import RegisterYourBusiness from "./pages/RegisterYourBusiness.jsx";
 import { store } from "./store/store.js";
 import { Provider } from "react-redux";
 
@@ -12,6 +15,18 @@ const router = createBrowserRouter([
     path: "/",
     element: <Landing />,
     errorElement: <Error />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/submitRequirement",
+    element: <SubmitRequirements />,
+  },
+  {
+    path: "/RegisterBusiness",
+    element: <RegisterYourBusiness />,
   },
 ]);
 

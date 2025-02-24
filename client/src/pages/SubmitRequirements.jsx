@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../store/auth/authSlice";
 
-const Signup = () => {
+const SubmitRequirements = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -148,7 +148,7 @@ const Signup = () => {
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Signup
+              Submit Your Requirements
             </Button>
           </Form.Item>
         </Form>
@@ -166,4 +166,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SubmitRequirements;
