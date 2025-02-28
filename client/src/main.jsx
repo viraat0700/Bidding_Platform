@@ -7,6 +7,8 @@ import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
 import SubmitRequirements from "./pages/SubmitRequirements.jsx";
 import RegisterYourBusiness from "./pages/RegisterYourBusiness.jsx";
+import App from "./App.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import { store } from "./store/store.js";
 import { Provider } from "react-redux";
 
@@ -28,6 +30,21 @@ const router = createBrowserRouter([
     path: "/RegisterBusiness",
     element: <RegisterYourBusiness />,
   },
+  {
+    path: "/auction",
+    element: <Dashboard />,
+  },
+  // {
+  //   path: "/",
+  //   element: <App />,
+  //   errorElement: <Error />,
+  //   children: [
+  //     {
+  //       path: "auction",
+  //       element: <Dashboard />,
+  //     },
+  //   ],
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

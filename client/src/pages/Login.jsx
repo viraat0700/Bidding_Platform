@@ -2,48 +2,29 @@ import { Button, Card, Checkbox, Form, Input } from "antd";
 import { FiHome } from "react-icons/fi";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { login } from "../store/auth/authSlice";
+import { useState } from "react";
 
 const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  const { user, errorData } = useSelector((state) => state.auth);
-  const [error, setError] = useState(errorData);
-  const [formData, setformData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.email || !formData.password) {
-      return setError("All fields are required");
-    }
-    try {
-      const resultAction = await dispatch(login(formData));
-      if (login.fulfilled.match(resultAction)) {
-        navigate("/auction");
-      } else {
-        if (resultAction.payload) {
-          setError(resultAction.payload);
-        } else {
-          setError("Login failed. Please try again.");
-        }
-      }
-    } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
-      console.log(error);
-    }
+  // HardCoded user credentials
+  const validUser = {
+    email: "abc@gmail.com",
+    password: "123456789",
   };
 
-  useEffect(() => {
-    if (user) {
+  const handleSubmit = (values) => {
+    // Compare form values with valid user credentials
+    if (
+      values.email === validUser.email &&
+      values.password === validUser.password
+    ) {
       navigate("/auction");
+    } else {
+      setError("Invalid Email or Password");
     }
-  }, [user, navigate]);
+  };
 
   return (
     <div className="min-h-svh min-w-full flex flex-col items-center justify-center">
@@ -80,7 +61,7 @@ const Login = () => {
           }}
           autoComplete="off"
           layout="vertical"
-          onSubmitCapture={handleSubmit}
+          onFinish={handleSubmit}
         >
           <Form.Item
             label="Email"
@@ -90,14 +71,13 @@ const Login = () => {
                 required: true,
                 message: "Please input your email!",
               },
+              {
+                type: "email",
+                message: "Please enter a valid email address!",
+              },
             ]}
           >
-            <Input
-              onChange={(e) =>
-                setformData({ ...formData, email: e.target.value })
-              }
-              value={formData.email}
-            />
+            <Input placeholder="user@example.com" />
           </Form.Item>
 
           <Form.Item
@@ -108,14 +88,13 @@ const Login = () => {
                 required: true,
                 message: "Please input your password!",
               },
+              {
+                min: 8,
+                message: "Password must be at least 8 characters long!",
+              },
             ]}
           >
-            <Input.Password
-              onChange={(e) =>
-                setformData({ ...formData, password: e.target.value })
-              }
-              value={formData.password}
-            />
+            <Input.Password placeholder="Password123!" />
           </Form.Item>
 
           <Form.Item name="remember" valuePropName="checked">
