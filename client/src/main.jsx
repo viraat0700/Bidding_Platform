@@ -34,17 +34,17 @@ const router = createBrowserRouter([
     path: "/auction",
     element: <Dashboard />,
   },
-  // {
-  //   path: "/",
-  //   element: <App />,
-  //   errorElement: <Error />,
-  //   children: [
-  //     {
-  //       path: "auction",
-  //       element: <Dashboard />,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "auction",
+        element: <Dashboard />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
